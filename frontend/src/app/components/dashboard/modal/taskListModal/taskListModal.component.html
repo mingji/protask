@@ -1,0 +1,15 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">{{task_list.id == 0 ? 'Add' : 'Update'}} Task List</h4>
+    <button class="close" aria-label="Close" (click)="activeModal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <ngb-alert *ngIf="error!=''" [type]="'danger'" (close)="error=''">{{error}}</ngb-alert>
+      <input type="text" class="form-control" placeholder="Task List Name"  [(ngModel)]="task_list.name">
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="task_list.name == ''" class="btn btn-primary confirm-btn" (click)="submit()">Submit</button>
+  </div>
+</div>

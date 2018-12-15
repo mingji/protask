@@ -1,0 +1,25 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">{{task.id == 0 ? 'Add' : 'Update'}} Task</h4>
+    <button class="close" aria-label="Close" (click)="activeModal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <ngb-alert *ngIf="error!=''" [type]="'danger'" (close)="error=''">{{error}}</ngb-alert>
+      <input type="text" class="form-control mb-2" placeholder="Name"  [(ngModel)]="task.name">
+      <textarea class="form-control mb-2" placeholder="Description"  [(ngModel)]="task.description" rows=5></textarea>
+      <select *ngIf="task.id != 0" class="form-control mb-2" [(ngModel)]="task.status">
+        <option value=0>Created</option>
+        <option value=1>Working</option>
+        <option value=2>Completed</option>
+      </select>
+      
+      <div *ngIf="task.id != 0" class="mb-1"><strong>Added Time</strong> : {{task.created_at}}</div>
+      <div *ngIf="task.id != 0" class="mb-2"><strong>Finished Time</strong>: {{task.finished_at}}</div>
+      
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="task.name == ''" class="btn btn-primary confirm-btn" (click)="submit()">Submit</button>
+  </div>
+</div>

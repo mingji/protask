@@ -1,0 +1,46 @@
+<div class="p-4 dashboard-page">
+  
+  <ngb-alert *ngIf="error!=''" [type]="'danger'" (close)="error=''">{{error}}</ngb-alert>
+
+  <div class="task-list"  *ngFor="let task_list of taskService.task_lists">
+    <div class="card mr-2">
+        <div class="card-header">
+          {{task_list.name}}
+          <div ngbDropdown class="d-inline-block float-right">
+            <a href="javascript:void(0)" ngbDropdownToggle></a>
+            <div ngbDropdownMenu >
+              <button class="dropdown-item" (click)="openTaskListModal(task_list)">Update List</button>
+              <button class="dropdown-item" (click)="deleteTaskList(task_list)">Delete List</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-2 task-item-container">
+          <div class="task-item p-1" *ngFor="let task of task_list.tasks" (click)="openTaskModal(task)">
+            <div class="del-task float-right">
+              <a href="javascript:void(0)" (click)="deleteTask(task)"><i class="fa fa-times"></i></a>
+            </div>
+            <strong>{{task.name}}</strong>
+            <div class="task-description">
+              {{task.description}}
+            </div>
+              
+          </div>
+        </div>
+        <button class="btn btn-light"  (click)="openNewTaskModal(task_list)" >+ Add New Task</button>
+        
+    </div>
+  </div>
+
+
+  <div class="task-list add-task-list">
+    <div class="card mr-2">
+        <button class="btn btn-success" (click)="openTaskListModal()">+ Add Task List</button>
+    </div>
+  </div>
+  
+
+  
+
+
+
+</div>
